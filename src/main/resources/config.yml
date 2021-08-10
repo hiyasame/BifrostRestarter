@@ -1,0 +1,38 @@
+# BifrostRestart by.寒雨
+# Powered by TabooLib6.0
+# 本配置中的所有文本均支持由TabooLib提供的高级颜色代码
+settings:
+  # 重启时间
+  time: '23:59'
+  # 重启时将玩家踢出服务器的提示信息
+  # 换行符\n
+  kick-message: '&7&l[&f&lBifrostCraft&7&l] &7重启服务器'
+  # 重启前指定时间的全服通告
+  remind:
+    30s:
+      # actionbar支持:
+      # actionbar: '&7&l[&f&lBifrostCraft&7&l] &7距离下次重启剩余时间: &f30s'
+      message:
+      - '&7&l[&f&lBifrostCraft&7&l] &7距离下次重启剩余时间: &f30s'
+      # 第一行为title，第二行subtitle
+      title:
+      - '&8重启时间剩余'
+      - '&f&l30s'
+    10s:
+      message:
+        - '&7&l[&f&lBifrostCraft&7&l] &7距离下次重启剩余时间: &f10s'
+      title:
+        - '&c重启时间剩余'
+        - '&4&l10s'
+    5min:
+      message:
+        - '&7&l[&f&lBifrostCraft&7&l] &7距离下次重启剩余时间: &f5min'
+      title:
+        - '&8重启时间剩余'
+        - '&f&l5min'
+    30min:
+      message:
+        - '&7&l[&f&lBifrostCraft&7&l] &7距离下次重启剩余时间: &f30min'
+      title:
+        - '&8重启时间剩余'
+        - '&f&l30min'

@@ -5,10 +5,19 @@ plugins {
 }
 
 taboolib {
+    description {
+        contributors {
+            name("寒雨")
+        }
+        desc("基于TabooLib6的定时重启插件")
+    }
     install("common")
     install("platform-bukkit")
+    install("module-configuration")
+    install("module-chat")
+    install("module-metrics")
     classifier = null
-    version = "6.0.0-pre14"
+    version = "6.0.0-pre37"
 }
 
 repositories {
