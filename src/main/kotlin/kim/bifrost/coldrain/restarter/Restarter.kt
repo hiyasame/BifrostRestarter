@@ -10,6 +10,7 @@ import taboolib.module.configuration.SecuredFile
 import taboolib.module.metrics.Metrics
 import taboolib.platform.BukkitPlugin
 import java.text.SimpleDateFormat
+import java.util.concurrent.ConcurrentHashMap
 
 object Restarter : Plugin() {
 
@@ -17,7 +18,7 @@ object Restarter : Plugin() {
     lateinit var conf: SecuredFile
         private set
 
-    val reminds = HashMap<Long,ConfigurationSection>()
+    val reminds = ConcurrentHashMap<Long,ConfigurationSection>()
 
     val dateFormat = SimpleDateFormat("HH:mm")
 
@@ -57,9 +58,9 @@ object Restarter : Plugin() {
                         val actionbar = section.getString("actionbar")
                         val title: List<String>? = section.getStringList("title")
                         onlinePlayers().forEach {
-                            actionbar?.let { s -> it.sendActionBar(s) }
-                            message?.let { strs -> strs.forEach { s -> it.sendMessage(s) } }
-                            title?.let { strs -> it.sendTitle(strs.getOrNull(0), strs.getOrNull(1), 10, 40, 10) }
+                            actionbar?.let { s -> it.sendActionBar(HexColor.translate(s)) }
+                            message?.let { strs -> strs.forEach { s -> it.sendMessage(HexColor.translate(s)).also { console().sendMessage(HexColor.translate(s)) } } }
+                            title?.let { strs -> it.sendTitle(strs.getOrNull(0)?.run { HexColor.translate(this) }, strs.getOrNull(1)?.run { HexColor.translate(this) }, 10, 40, 10) }
                         }
                         reminds.remove(it)
                     }
