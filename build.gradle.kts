@@ -10,6 +10,7 @@ taboolib {
             name("寒雨")
         }
         desc("基于TabooLib6的定时重启插件")
+
     }
     install("common")
     install("platform-bukkit")

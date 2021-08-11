@@ -25,13 +25,19 @@ object Utils {
         if (m.find()) {
             try {
                 hour = NumberConversions.toLong(m.group("hour"))
-            } catch (ignored: IllegalStateException) {}
+            } catch (ignored: IllegalStateException) {
+                ignored.printStackTrace()
+            }
             try {
                 minute = NumberConversions.toLong(m.group("minute"))
-            } catch (ignored: IllegalStateException) {}
+            } catch (ignored: IllegalStateException) {
+                ignored.printStackTrace()
+            }
             try {
                 seconds = NumberConversions.toLong(m.group("second"))
-            } catch (ignored: IllegalStateException) {}
+            } catch (ignored: IllegalStateException) {
+                ignored.printStackTrace()
+            }
         }
         return TimeUnit.SECONDS.toMillis(seconds) + TimeUnit.MINUTES.toMillis(minute) + TimeUnit.HOURS.toMillis(hour)
     }

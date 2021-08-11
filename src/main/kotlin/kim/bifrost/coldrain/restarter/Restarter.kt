@@ -10,6 +10,7 @@ import taboolib.module.configuration.SecuredFile
 import taboolib.module.metrics.Metrics
 import taboolib.platform.BukkitPlugin
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 object Restarter : Plugin() {
@@ -27,7 +28,8 @@ object Restarter : Plugin() {
     }
 
     val timeMillis by lazy {
-        dateFormat.parse(time).time
+        val current = dateFormat.format(Date())
+        System.currentTimeMillis() - dateFormat.parse(current).time + dateFormat.parse(time).time
     }
 
     @Awake(LifeCycle.ENABLE)
@@ -38,6 +40,7 @@ object Restarter : Plugin() {
                 reminds[Utils.parseTimeMillis(s)] = it.getConfigurationSection(s)
             }
         }
+        dateFormat.parse(time).time
     }
 
     @Awake(LifeCycle.ENABLE)
@@ -46,7 +49,9 @@ object Restarter : Plugin() {
         submit(async = true, period = 300) {
             if (dateFormat.format(System.currentTimeMillis()) == time) {
                 onlinePlayers().forEach {
-                    it.kick(HexColor.translate(conf.getString("settings.kick-message")))
+                    submit {
+                        it.kick(HexColor.translate(conf.getString("settings.kick-message")))
+                    }
                 }
                 console().sendMessage(HexColor.translate("&7&l[&f&lBifrostRestart&7&l] &f重启服务器..."))
                 Bukkit.shutdown()
@@ -59,9 +64,10 @@ object Restarter : Plugin() {
                         val title: List<String>? = section.getStringList("title")
                         onlinePlayers().forEach {
                             actionbar?.let { s -> it.sendActionBar(HexColor.translate(s)) }
-                            message?.let { strs -> strs.forEach { s -> it.sendMessage(HexColor.translate(s)).also { console().sendMessage(HexColor.translate(s)) } } }
+                            message?.let { strs -> strs.forEach { s -> it.sendMessage(HexColor.translate(s)) } }
                             title?.let { strs -> it.sendTitle(strs.getOrNull(0)?.run { HexColor.translate(this) }, strs.getOrNull(1)?.run { HexColor.translate(this) }, 10, 40, 10) }
                         }
+                        message?.let { it.forEach { s -> console().sendMessage(HexColor.translate(s)) } }
                         reminds.remove(it)
                     }
                 }
