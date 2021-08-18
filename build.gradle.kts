@@ -1,6 +1,6 @@
 plugins {
     java
-    id("io.izzel.taboolib") version "1.12"
+    id("io.izzel.taboolib") version "1.18"
     id("org.jetbrains.kotlin.jvm") version "1.5.10"
 }
 
@@ -10,7 +10,6 @@ taboolib {
             name("寒雨")
         }
         desc("基于TabooLib6的定时重启插件")
-
     }
     install("common")
     install("platform-bukkit")
@@ -18,7 +17,7 @@ taboolib {
     install("module-chat")
     install("module-metrics")
     classifier = null
-    version = "6.0.0-pre37"
+    version = "6.0.0-pre51"
 }
 
 repositories {

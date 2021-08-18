@@ -3,6 +3,9 @@ package kim.bifrost.coldrain.restarter
 import org.bukkit.Bukkit
 import taboolib.common.LifeCycle
 import taboolib.common.platform.*
+import taboolib.common.platform.function.console
+import taboolib.common.platform.function.onlinePlayers
+import taboolib.common.platform.function.submit
 import taboolib.library.configuration.ConfigurationSection
 import taboolib.module.chat.HexColor
 import taboolib.module.configuration.Config
